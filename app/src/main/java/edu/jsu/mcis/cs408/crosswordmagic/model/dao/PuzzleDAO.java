@@ -103,11 +103,18 @@ public class PuzzleDAO {
             INSERT YOUR CODE HERE
 
             */
+            params.put("name", cursor.getString(1));
+            params.put("description", cursor.getString(2));
+            params.put("height", cursor.getString(3));
+            params.put("width", cursor.getString(4));
 
-            if ( !params.isEmpty() )
+            if ( !params.isEmpty() ) {
+                int y =1;
                 puzzle = new Puzzle(params);
+            }
 
             /* get list of words (if any) to add to puzzle */
+
 
             WordDAO wordDao = daoFactory.getWordDAO();
 

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
         controller.getTestProperty(CrosswordMagicController.TEST_PROPERTY);
 
+
     }
 
     @Override

@@ -20,6 +20,7 @@ public class CrosswordMagicModel extends AbstractModel {
 
         this.puzzle = puzzleDAO.find(DEFAULT_PUZZLE_ID);
 
+
     }
 
     public void getTestProperty() {

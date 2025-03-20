@@ -28,10 +28,12 @@ public class DAOFactory extends SQLiteOpenHelper {
     private final DAOProperties properties;
 
     private static final String DATABASE_NAME = "cwmagic.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final int CSV_HEADER_FIELDS = 4;
     private static final int CSV_DATA_FIELDS = 6;
+
+
 
     public DAOFactory(Context context) {
 
@@ -39,6 +41,7 @@ public class DAOFactory extends SQLiteOpenHelper {
         this.context = context;
 
         properties = new DAOProperties(context, DATABASE_NAME);
+
 
     }
 
@@ -83,6 +86,7 @@ public class DAOFactory extends SQLiteOpenHelper {
         /* populate initial database with puzzle from the CSV data file */
 
         try {
+            Log.i("TagOfTags", "It is running!");
 
             /* acquire DAO objects */
 
@@ -122,11 +126,23 @@ public class DAOFactory extends SQLiteOpenHelper {
 
                 /* add words for new puzzle to the database */
 
+                String puzzleidStr = getProperty("sql_field_puzzleid");
+                String row = getProperty("sql_field_row");
+                String column = getProperty("sql_field_column");
+                String box = getProperty("sql_field_box");
+                String direction = getProperty("sql_field_direction");
+                String word = getProperty("sql_field_word");
+                String clue = getProperty("sql_field_clue");
+
                 for (int i = 1; i < csv.size(); ++i) {
 
                     fields = csv.get(i);
 
                     if (fields.length == CSV_DATA_FIELDS) {
+
+
+
+
 
                         params = new HashMap<>();
 
@@ -136,9 +152,21 @@ public class DAOFactory extends SQLiteOpenHelper {
 
                         */
 
+                        //putting String values from csv rows and columns into params, putting params into word, appending word to words in puzzle
+                        params.put("puzzleid", String.valueOf(puzzleid));
+                        params.put(row, fields[0]);
+                        params.put(column, fields[1]);
+                        params.put(box, fields[2]);
+                        params.put(direction, fields[3]);
+                        params.put(word, fields[4]);
+                        params.put(clue, fields[5]);
+
+
+
                         Word newWord = new Word(params);
 
                         int id = wordDAO.create(db, newWord);
+
 
                     }
 
