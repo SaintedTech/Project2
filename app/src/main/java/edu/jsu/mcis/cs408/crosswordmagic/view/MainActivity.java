@@ -9,6 +9,7 @@ import android.view.View;
 import java.beans.PropertyChangeEvent;
 
 import edu.jsu.mcis.cs408.crosswordmagic.R;
+import edu.jsu.mcis.cs408.crosswordmagic.controller.AbstractController;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.databinding.ActivityMainBinding;
 import edu.jsu.mcis.cs408.crosswordmagic.model.CrosswordMagicModel;
@@ -58,10 +59,14 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
             String placeholder = getString(R.string.placeholder_text) + value;
 
-            binding.output.setText(placeholder);
+            //binding.output.setText(placeholder);
 
         }
 
+    }
+
+    public CrosswordMagicController getController(){
+        return this.controller;
     }
 
 }
