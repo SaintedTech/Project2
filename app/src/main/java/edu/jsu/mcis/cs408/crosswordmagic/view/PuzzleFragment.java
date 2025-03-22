@@ -38,6 +38,7 @@ public class PuzzleFragment extends Fragment implements AbstractView{
 
 
 
+
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -48,6 +49,7 @@ public class PuzzleFragment extends Fragment implements AbstractView{
         controller.addView(this);
 
     }
+
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {

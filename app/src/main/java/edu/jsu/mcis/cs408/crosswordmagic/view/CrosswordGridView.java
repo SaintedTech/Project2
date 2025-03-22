@@ -1,16 +1,21 @@
 package edu.jsu.mcis.cs408.crosswordmagic.view;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.InputType;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,8 +33,8 @@ public class CrosswordGridView extends View implements AbstractView {
 
     private final char BLOCK = '*';
 
-    private final float TEXT_NUMBER_SCALE = 4.75f;
-    private final float TEXT_LETTER_SCALE = 1.5f;
+    private final float TEXT_NUMBER_SCALE = 7.2f; // changed from 4.75
+    private final float TEXT_LETTER_SCALE = 2.5f; // changed value from 1.5f because it amde the numbers too large
 
     private final Paint gridPaint;
     private final TextPaint gridTextPaint;
@@ -39,6 +44,18 @@ public class CrosswordGridView extends View implements AbstractView {
 
     private Character[][] letters;
     private Integer[][] numbers;
+    private int previousX = Integer.MAX_VALUE;
+    private int previousy = Integer.MAX_VALUE;
+
+
+
+    private Boolean isTouched = false;
+    
+
+    
+
+
+
 
 
 
@@ -66,6 +83,38 @@ public class CrosswordGridView extends View implements AbstractView {
 
 
 
+
+    }
+    private void showInputDialog(int number) {
+
+        EditText input = new EditText(getContext());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        // build the alertDialog
+        new AlertDialog.Builder(getContext())
+                .setTitle("Enter Your Guess For: " + String.valueOf(number))
+                .setView(input) // set EdiTtext in dialog
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userInput = input.getText().toString();
+
+                        //create parcel
+                        //String[] parcel = {String.valueOf(number), userInput};
+                        //controller.setGuess(parcel);
+
+
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -241,6 +290,7 @@ public class CrosswordGridView extends View implements AbstractView {
 
             if (value instanceof Character[][]) {
 
+                //if(!this.letters.equals(value))
                 this.letters = (Character[][]) value;
 
                 invalidate();
@@ -282,6 +332,7 @@ public class CrosswordGridView extends View implements AbstractView {
 
         private Context context;
 
+
         public OnTouchHandler(Context context) {
             this.context = context;
         }
@@ -290,8 +341,13 @@ public class CrosswordGridView extends View implements AbstractView {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
 
+
+
             int eventX = (int)event.getX();
             int eventY = (int)event.getY();
+
+
+
 
             if (eventX >= xBegin && eventX <= xEnd && eventY >= yBegin && eventY <= yEnd) {
 
@@ -299,16 +355,19 @@ public class CrosswordGridView extends View implements AbstractView {
                 int y = ((eventY - yBegin) / squareHeight);
                 int n = numbers[y][x];
 
+
                 if (n != 0) {
                     String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
-                    Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, view.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
                 }
 
             }
 
-            return false;
+
+            return true;
 
         }
+
 
     }
 

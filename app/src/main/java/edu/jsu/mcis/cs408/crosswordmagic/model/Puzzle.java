@@ -111,7 +111,7 @@ public class Puzzle {
 
         /* add word to guessed list (for development only!) */
 
-        addWordToGuessed(key); // remove this later!
+
 
     }
 
@@ -199,6 +199,7 @@ public class Puzzle {
     public Word getWord(String key) {
         return words.get(key);
     }
+
 
     public String getName() {
         return name;
