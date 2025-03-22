@@ -129,15 +129,17 @@ public class Puzzle {
 
         /* compare guess to both words; if a match is found, add word to guessed list */
 
+        //William Saint - Changed from equals to equals ignore case
+
         if (across != null) {
-            if (across.getWord().equals(guess) && !(guessed.contains(acrossKey))) {
+            if (across.getWord().equals(guess.toUpperCase()) && !(guessed.contains(acrossKey))) {
                 result = WordDirection.ACROSS;
-                addWordToGuessed(downKey);
+                addWordToGuessed(acrossKey);
             }
         }
 
         if (down != null) {
-            if (down.getWord().equals(guess) && !(guessed.contains(downKey))) {
+            if (down.getWord().equals(guess.toUpperCase()) && !(guessed.contains(downKey))) {
                 result = WordDirection.DOWN;
                 addWordToGuessed(downKey);
             }

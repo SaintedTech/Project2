@@ -62,6 +62,7 @@ public class CrosswordMagicModel extends AbstractModel {
         if(puzzle.checkGuess(number, parcel[1]) != null){
             if(!Arrays.deepEquals(copy, puzzle.getLetters()))
              getGridLetters();
+
         }
 
 

@@ -100,8 +100,8 @@ public class CrosswordGridView extends View implements AbstractView {
                         String userInput = input.getText().toString();
 
                         //create parcel
-                        //String[] parcel = {String.valueOf(number), userInput};
-                        //controller.setGuess(parcel);
+                        String[] parcel = {String.valueOf(number), userInput};
+                        controller.setGuess(parcel);
 
 
 
@@ -357,6 +357,7 @@ public class CrosswordGridView extends View implements AbstractView {
 
 
                 if (n != 0) {
+                    showInputDialog(n);
                     String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
                     Toast.makeText(context, view.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
                 }
