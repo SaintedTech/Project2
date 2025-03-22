@@ -3,4 +3,6 @@
     <string name="placeholder_text">"Number of Words in Default Puzzle: "</string>
     <string name="clue_header_across">Across</string>
     <string name="clue_header_down">Down</string>
+    <string name="congrats_you_guessed_correctly">Congrats! You guessed Correctly!</string>
+    <string name="better_luck_next_time">Better luck next time!</string>
 </resources>

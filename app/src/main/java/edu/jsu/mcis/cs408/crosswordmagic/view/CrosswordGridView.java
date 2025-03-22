@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import java.beans.PropertyChangeEvent;
 import java.util.Locale;
 
+import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.databinding.FragmentPuzzleBinding;
 
@@ -107,10 +108,10 @@ public class CrosswordGridView extends View implements AbstractView {
                         String[] parcel = {String.valueOf(number), userInput};
                         controller.setGuess(parcel);
                         if(guessedCorret) {
-                            Toast.makeText(getContext(), "Congrats! You guessed Correctly!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.congrats_you_guessed_correctly, Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(getContext(), "Better luck next time!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.better_luck_next_time, Toast.LENGTH_SHORT).show();
                         }
                         isActive = false;
 
