@@ -60,9 +60,12 @@ public class CrosswordMagicModel extends AbstractModel {
 
         int number = Integer.parseInt(parcel[0]);
         if(puzzle.checkGuess(number, parcel[1]) != null){
-            if(!Arrays.deepEquals(copy, puzzle.getLetters()))
-             getGridLetters();
 
+             getGridLetters();
+            firePropertyChange(CrosswordMagicController.GUESS_WORD_PROPERTY, null, true);
+
+        }else{
+            firePropertyChange(CrosswordMagicController.GUESS_WORD_PROPERTY, null, false);
         }
 
 

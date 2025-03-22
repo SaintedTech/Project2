@@ -49,7 +49,11 @@ public class CrosswordGridView extends View implements AbstractView {
 
 
 
-    private Boolean isTouched = false;
+    private Boolean guessedCorret = false;
+
+    private Boolean isActive = false;
+
+
     
 
     
@@ -102,6 +106,13 @@ public class CrosswordGridView extends View implements AbstractView {
                         //create parcel
                         String[] parcel = {String.valueOf(number), userInput};
                         controller.setGuess(parcel);
+                        if(guessedCorret) {
+                            Toast.makeText(getContext(), "Congrats! You guessed Correctly!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getContext(), "Better luck next time!", Toast.LENGTH_SHORT).show();
+                        }
+                        isActive = false;
 
 
 
@@ -111,6 +122,7 @@ public class CrosswordGridView extends View implements AbstractView {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                        isActive = false;
 
                     }
                 })
@@ -286,6 +298,13 @@ public class CrosswordGridView extends View implements AbstractView {
         String name = evt.getPropertyName();
         Object value = evt.getNewValue();
 
+        if(name.equals(CrosswordMagicController.GUESS_WORD_PROPERTY)){
+            if (value instanceof Boolean){
+                if (value != guessedCorret)
+                    guessedCorret = (Boolean) value;
+            }
+        }
+
         if (name.equals(CrosswordMagicController.GRID_LETTERS_PROPERTY)) {
 
             if (value instanceof Character[][]) {
@@ -356,10 +375,12 @@ public class CrosswordGridView extends View implements AbstractView {
                 int n = numbers[y][x];
 
 
-                if (n != 0) {
+                if (n != 0 && !isActive) {
+                    isActive = true;
                     showInputDialog(n);
-                    String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
-                    Toast.makeText(context, view.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
+                   // String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
+
+
                 }
 
             }
