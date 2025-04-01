@@ -45,8 +45,7 @@ public class CrosswordGridView extends View implements AbstractView {
 
     private Character[][] letters;
     private Integer[][] numbers;
-    private int previousX = Integer.MAX_VALUE;
-    private int previousy = Integer.MAX_VALUE;
+
 
 
 
