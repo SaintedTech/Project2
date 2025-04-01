@@ -39,8 +39,8 @@ public class ClueFragment extends Fragment implements AbstractView {
 
 
 
-        aContainer.setTextSize(18f);
-        dContainer.setTextSize(18f);
+        //aContainer.setTextSize(16f);
+        //dContainer.setTextSize(16f);
 
         //get words from model
         controller.getWords();

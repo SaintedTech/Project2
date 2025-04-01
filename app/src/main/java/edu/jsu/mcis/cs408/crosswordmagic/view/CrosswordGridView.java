@@ -34,8 +34,8 @@ public class CrosswordGridView extends View implements AbstractView {
 
     private final char BLOCK = '*';
 
-    private final float TEXT_NUMBER_SCALE = 7.2f; // changed from 4.75
-    private final float TEXT_LETTER_SCALE = 2.5f; // changed value from 1.5f because it amde the numbers too large
+    private final float TEXT_NUMBER_SCALE = 4.75f; // changed from 4.75, to 7.75
+    private final float TEXT_LETTER_SCALE = 1.5f; // changed value from 1.5f because it amde the numbers too large, to 2.5
 
     private final Paint gridPaint;
     private final TextPaint gridTextPaint;
