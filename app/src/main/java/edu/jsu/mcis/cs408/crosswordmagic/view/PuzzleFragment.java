@@ -30,7 +30,7 @@ public class PuzzleFragment extends Fragment implements AbstractView{
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentPuzzleBinding.inflate(getLayoutInflater(), container, false);
         crosswordGridView = new CrosswordGridView(requireContext(), null);
-        binding.getRoot().addView(crosswordGridView);
+       // binding.getRoot().addView(crosswordGridView);
         return binding.getRoot();
 
     }
@@ -57,12 +57,16 @@ public class PuzzleFragment extends Fragment implements AbstractView{
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        if (context instanceof FragmentEventListener) {
+            callback = (FragmentEventListener) context;
+        }
 
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        callback = null;
 
     }
 
@@ -70,8 +74,9 @@ public class PuzzleFragment extends Fragment implements AbstractView{
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+
     }
     public interface FragmentEventListener {
-        public void onFragmentButtonClick(String outputText);
+        public void onFragmentOnTouch(String outputText);
     }
 }
