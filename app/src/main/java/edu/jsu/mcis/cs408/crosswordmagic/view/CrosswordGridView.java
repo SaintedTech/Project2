@@ -368,6 +368,7 @@ public class CrosswordGridView extends View implements AbstractView {
 
 
 
+
             if (eventX >= xBegin && eventX <= xEnd && eventY >= yBegin && eventY <= yEnd) {
 
                 int x = ((eventX - xBegin) / squareWidth);
