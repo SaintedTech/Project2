@@ -17,14 +17,18 @@ public class CrosswordMagicModel extends AbstractModel {
 
     private Puzzle puzzle;
 
-    public CrosswordMagicModel(Context context) {
-
-        DAOFactory daoFactory = new DAOFactory(context);
-        PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
-
-        this.puzzle = puzzleDAO.find(DEFAULT_PUZZLE_ID);
+    private final DAOFactory daoFactory;
+    private final  PuzzleDAO puzzleDAO;
 
 
+
+    public CrosswordMagicModel(Context context, Integer id) {
+
+        this.daoFactory = new DAOFactory(context);
+        this.puzzleDAO = daoFactory.getPuzzleDAO();
+
+        this.puzzle = puzzleDAO.find(id.intValue()+1);//added plus one for offset
+        String test = "Test";
     }
 
     public void getTestProperty() {
@@ -71,6 +75,15 @@ public class CrosswordMagicModel extends AbstractModel {
 
 
 
+
+    }
+    public void getPuzzleList(){
+
+
+        PuzzleListItem[] PLI = puzzleDAO.list();
+        if(PLI != null){
+            firePropertyChange(CrosswordMagicController.PUZZLE_LIST_PROPERTY, null, PLI);
+        }
 
     }
 

@@ -19,6 +19,7 @@ import java.util.List;
 
 import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.model.Puzzle;
+import edu.jsu.mcis.cs408.crosswordmagic.model.PuzzleListItem;
 import edu.jsu.mcis.cs408.crosswordmagic.model.Word;
 import edu.jsu.mcis.cs408.crosswordmagic.model.WordDirection;
 
@@ -157,5 +158,29 @@ public class PuzzleDAO {
         return puzzle;
 
     }
+
+    public PuzzleListItem[] list(){
+
+
+        SQLiteDatabase db = daoFactory.getWritableDatabase();
+        String grabAll = "Select * from puzzles order by name";
+        Cursor cursor = db.rawQuery(grabAll, null);
+
+
+        ArrayList<PuzzleListItem> list = new ArrayList<>();
+
+        if(cursor != null){
+
+            while(cursor.moveToNext()){
+
+                list.add(new PuzzleListItem(Integer.getInteger(cursor.getString(0)), cursor.getString(1)));
+
+            }
+        }
+        db.close();
+
+        return list.toArray(new PuzzleListItem[]{});
+    }
+
 
 }

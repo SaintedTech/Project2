@@ -5,4 +5,6 @@
     <string name="clue_header_down">Down</string>
     <string name="congrats_you_guessed_correctly">Congrats! You guessed Correctly!</string>
     <string name="better_luck_next_time">Better luck next time!</string>
+    <string name="crossword_magic_cover">Crossword Magic</string>
+    <string name="button_play">Play</string>
 </resources>

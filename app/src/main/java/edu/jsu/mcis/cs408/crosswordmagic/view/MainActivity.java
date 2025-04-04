@@ -35,7 +35,14 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
         controller = new CrosswordMagicController();
 
-        CrosswordMagicModel model = new CrosswordMagicModel(this);
+        int puzzleid = 0;
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            puzzleid = extras.getInt("puzzleid");
+        }
+
+        CrosswordMagicModel model = new CrosswordMagicModel(this, new Integer(puzzleid));
 
         /* Register View(s) and Model(s) with Controller */
 

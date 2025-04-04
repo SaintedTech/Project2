@@ -9,6 +9,7 @@ public class CrosswordMagicController extends AbstractController {
 
     public static final String CLUE_WORDS_PROPERTY = "Clues";
     public static final String GUESS_WORD_PROPERTY = "Guess";
+    public static final String PUZZLE_LIST_PROPERTY = "PuzzleList";
 
     public void getTestProperty(String value) {
         getModelProperty(TEST_PROPERTY);
@@ -29,6 +30,9 @@ public class CrosswordMagicController extends AbstractController {
     }
     public void setGuess(String[] parcel){
         setModelProperty(GUESS_WORD_PROPERTY, parcel);
+    }
+    public void getPuzzleList(){
+        getModelProperty(PUZZLE_LIST_PROPERTY);
     }
 
 }

@@ -40,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity implements AbstractView, 
 
         controller = new CrosswordMagicController();
 
-        CrosswordMagicModel model = new CrosswordMagicModel(this);
+        CrosswordMagicModel model = new CrosswordMagicModel(this, new Integer(1));
 
         /* Register View(s) and Model(s) with Controller */
 
@@ -87,6 +87,8 @@ public class WelcomeActivity extends AppCompatActivity implements AbstractView, 
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
 
         puzzleid = ((PuzzleListItem)adapterView.getItemAtPosition(i)).getId();
 
