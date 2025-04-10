@@ -162,6 +162,7 @@ public class PuzzleDAO {
     public PuzzleListItem[] list(){
 
 
+
         SQLiteDatabase db = daoFactory.getWritableDatabase();
         String grabAll = "Select * from puzzles order by name";
         Cursor cursor = db.rawQuery(grabAll, null);
