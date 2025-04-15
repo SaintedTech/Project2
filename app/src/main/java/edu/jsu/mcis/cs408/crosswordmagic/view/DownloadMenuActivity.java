@@ -58,12 +58,14 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
             Log.e("FATAL", "Uncaught exception in thread: " + t.getName(), e);
         });
 
-        adapter = new RecyclerViewAdapter(this, this.puzzleListItemsArrayList);
-        /*
-        binding.items.setHasFixedSize(true);
-        binding.items.setLayoutManager(new LinearLayoutManager(this));
-        binding.items.setAdapter(adapter);
-        */
+
+
+        super.onCreate(savedInstanceState);
+        binding = DownloadPageBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+       // updateRecyclerView();
+
          
 
         model = new CrosswordMagicModel(this, 1);
@@ -71,11 +73,6 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
         controller.addModel(model);
         controller.addView(this);
 
-        super.onCreate(savedInstanceState);
-        binding = DownloadPageBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
-        //updateRecyclerView();
 
         Context passing = this;
 
@@ -91,7 +88,7 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
             }
         });
 
-
+        //causes program to fail
       controller.getPuzzlesFromWeb();
 
 
@@ -105,13 +102,6 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
                 PuzzleListItem itemSelected = adapter.getListItem(position);
 
 
-                if (puzzleid.equals(itemSelected.getId())) {
-                    v.setBackgroundColor(Color.TRANSPARENT);
-                }
-                else{
-                    v.setBackgroundColor(Color.GRAY);
-                    puzzleid = itemSelected.getId();
-                }
 
 
             }
@@ -126,20 +116,19 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
     }
     private void updateRecyclerView() {
 
-        //add call to function to grab from webservices
-
-
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, this.puzzleListItemsArrayList);
+        ArrayList<PuzzleListItem> temp = new ArrayList<>();
+        temp.add(new PuzzleListItem(1, "Test"));
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, temp);
         binding.items.setHasFixedSize(true);
         binding.items.setLayoutManager(new LinearLayoutManager(this));
         binding.items.setAdapter(adapter);
-
 
     }
     private void parseData()  {
         try {
             PuzzleListItem temp = new PuzzleListItem(1, data.get("name").toString());
             puzzleListItemsArrayList.add(temp);
+            int y =1;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -172,8 +161,10 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
             if(value instanceof JSONObject){
                 this.data = (JSONObject) value;
                 parseData();
-                //updateRecyclerView();
-                adapter.notifyDataSetChanged();
+                updateRecyclerView();
+                String test = "Testing!";
+
+
             }
         }
 

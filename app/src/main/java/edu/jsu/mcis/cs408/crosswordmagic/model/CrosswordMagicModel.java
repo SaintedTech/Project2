@@ -106,6 +106,9 @@ public class CrosswordMagicModel extends AbstractModel {
         services.sendGetRequest();
 
     }
+    public void killThreads(){
+        services.killThreads();
+    }
     public class WebServices {
 
         private static final String TAG = "WebService";
@@ -151,7 +154,8 @@ public class CrosswordMagicModel extends AbstractModel {
 
         }
 
-
+       public void killThreads(){
+       }
         public JSONObject getOutputText() {
             return outputInfo;
         }
@@ -172,6 +176,7 @@ public class CrosswordMagicModel extends AbstractModel {
         public void sendGetRequest() {
             //requestThreadExecutor.execute(httpGetRequestThread);
             httpGetRequestThread.run();
+
             int y=1;
 
         }
@@ -257,6 +262,7 @@ public class CrosswordMagicModel extends AbstractModel {
 
 
                     try {
+
                         if (Thread.interrupted()){
                             int y =1;
                             throw new InterruptedException();
@@ -270,33 +276,33 @@ public class CrosswordMagicModel extends AbstractModel {
                     /* Create Request */
                     int y =1;
                     URL url = new URL(urlString);
-                    Log.w(TAG, "🟢 URL created");
+                    Log.w(TAG, "URL created");
 
 
 
                     conn = (HttpURLConnection)url.openConnection();
 
-                    Log.w(TAG, "🟢 Opened connection");
+                    Log.w(TAG, "Opened connection");
 
                     conn.setReadTimeout(10000); /* ten seconds */
                     conn.setConnectTimeout(15000); /* fifteen seconds */
 
                     conn.setRequestMethod(method);
                     conn.setDoInput(true);
-                    Log.w(TAG, "🟢 Set method and timeouts");
+                    Log.w(TAG, "Set method and timeouts");
 
                     /* Send Request */
-                    Log.w(TAG, "🟢 Connecting...");
+                    Log.w(TAG, "Connecting...");
 
                     conn.connect();
-                    Log.w(TAG, "✅ Connected. Response Code: " + conn.getResponseCode());
+                    Log.w(TAG, "Connected. Response Code: " + conn.getResponseCode());
 
-                /* Check if task has been interrupted
+                // Check if task has been interrupted
 
                 if (Thread.interrupted())
                     throw new InterruptedException();
 
-                 */
+
 
                     /* Get Reader for Results */
 
@@ -312,12 +318,12 @@ public class CrosswordMagicModel extends AbstractModel {
 
                     }
 
-                /* Check if task has been interrupted
+                //Check if task has been interrupted
 
-                if (Thread.interrupted())
+                   if (Thread.interrupted())
                     throw new InterruptedException();
 
-                 */
+
 
                     /* Parse Response as JSON */
 

@@ -14,24 +14,25 @@ import edu.jsu.mcis.cs408.crosswordmagic.model.Puzzle;
 import edu.jsu.mcis.cs408.crosswordmagic.model.PuzzleListItem;
 import edu.jsu.mcis.cs408.crosswordmagic.databinding.DownloadPageBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.jsu.mcis.cs408.crosswordmagic.model.PuzzleListItem;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-
     private DownloadListItemBinding binding;
     private List<PuzzleListItem> data;
 
     private DownloadMenuActivity activity;
 
 
-    public RecyclerViewAdapter(DownloadMenuActivity activity, List<PuzzleListItem> data) {
+    public RecyclerViewAdapter(DownloadMenuActivity activity, ArrayList<PuzzleListItem> data) {
 
         super();
         this.data = data;
         this.activity = activity;
+
     }
 
     @Override
@@ -51,7 +52,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        Log.d("Download", String.valueOf(data.size()));
         return data.size();
     }
     public PuzzleListItem getListItem(int position){
