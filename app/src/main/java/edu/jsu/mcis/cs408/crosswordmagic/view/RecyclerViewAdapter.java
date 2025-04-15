@@ -1,5 +1,6 @@
 package edu.jsu.mcis.cs408.crosswordmagic.view;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
+        Log.d("Download", String.valueOf(data.size()));
         return data.size();
     }
     public PuzzleListItem getListItem(int position){
