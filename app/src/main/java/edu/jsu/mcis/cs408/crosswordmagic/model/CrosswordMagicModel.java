@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -19,6 +20,7 @@ import javax.net.ssl.HttpsURLConnection;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.DAOFactory;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.PuzzleDAO;
+import edu.jsu.mcis.cs408.crosswordmagic.model.dao.WebServiceDAO;
 import edu.jsu.mcis.cs408.crosswordmagic.view.CrosswordGridView;
 
 
@@ -30,7 +32,8 @@ public class CrosswordMagicModel extends AbstractModel {
 
     private final DAOFactory daoFactory;
     private final  PuzzleDAO puzzleDAO;
-    private WebServices services;
+
+    private final WebServiceDAO webServiceDAO;
 
 
 
@@ -39,8 +42,8 @@ public class CrosswordMagicModel extends AbstractModel {
         this.daoFactory = new DAOFactory(context);
         this.puzzleDAO = daoFactory.getPuzzleDAO();
 
-        this.puzzle = puzzleDAO.find(id.intValue()+1);//added plus one for offset
-        this.services =  new WebServices();
+        this.puzzle = puzzleDAO.find(id.intValue());//added plus one for offset
+        this.webServiceDAO = daoFactory.getWebServiceDAO();
 
 
     }
@@ -103,12 +106,16 @@ public class CrosswordMagicModel extends AbstractModel {
 
     public void getPuzzleGet(){
 
-        services.sendGetRequest();
+        ArrayList<PuzzleListItem> temp = webServiceDAO.list();
+        firePropertyChange(CrosswordMagicController.PUZZLE_GET_REQUEST, null, temp);
 
     }
-    public void killThreads(){
-        services.killThreads();
+    public void setPuzzleAddToDatabaseHTTP(Integer id){
+        Integer temp = webServiceDAO.addPuzzleByIDToDatabase(id.intValue());
+        firePropertyChange(CrosswordMagicController.PUZZLE_ADD_TO_DATABASE_HTTP, null, temp);
+
     }
+
     public class WebServices {
 
         private static final String TAG = "WebService";

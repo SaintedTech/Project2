@@ -47,6 +47,9 @@ public class Word {
     public Integer getPuzzleid() {
         return puzzleid;
     }
+    public void setWordID(Integer id){
+        this.id = id;
+    }
 
     public Integer getRow() {
         return row;

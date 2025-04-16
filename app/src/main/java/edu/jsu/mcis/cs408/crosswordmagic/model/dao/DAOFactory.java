@@ -32,6 +32,7 @@ public class DAOFactory extends SQLiteOpenHelper {
 
     private static final int CSV_HEADER_FIELDS = 4;
     private static final int CSV_DATA_FIELDS = 6;
+    private SQLiteDatabase database;
 
 
 
@@ -55,6 +56,7 @@ public class DAOFactory extends SQLiteOpenHelper {
         PuzzleDAO puzzleDAO = new PuzzleDAO(this);
 
         addInitialDataFromCSV(db);
+        this.database = db;
 
     }
 
@@ -68,9 +70,15 @@ public class DAOFactory extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+    public SQLiteDatabase getDatabase(){
+        return this.database;
+    }
 
     public PuzzleDAO getPuzzleDAO() {
         return new PuzzleDAO(this);
+    }
+    public WebServiceDAO getWebServiceDAO(){
+        return new WebServiceDAO(this);
     }
 
     public WordDAO getWordDAO() {

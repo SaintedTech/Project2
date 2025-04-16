@@ -11,6 +11,7 @@ public class CrosswordMagicController extends AbstractController {
     public static final String GUESS_WORD_PROPERTY = "Guess";
     public static final String PUZZLE_LIST_PROPERTY = "PuzzleList";
     public static final String PUZZLE_GET_REQUEST = "PuzzleGet";
+    public static final String PUZZLE_ADD_TO_DATABASE_HTTP = "PuzzleAddToDatabaseHTTP";
 
     public void getTestProperty(String value) {
         getModelProperty(TEST_PROPERTY);
@@ -37,6 +38,10 @@ public class CrosswordMagicController extends AbstractController {
     }
     public void getPuzzlesFromWeb(){
         getModelProperty(PUZZLE_GET_REQUEST);
+    }
+    public void setPuzzleAddToDatabaseHTTP(Integer id){
+        setModelProperty(PUZZLE_ADD_TO_DATABASE_HTTP, id);
+
     }
 
 }

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +50,7 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
     private final PuzzleListItemClickHandler itemClick = new PuzzleListItemClickHandler();
     private JSONObject data;
     private RecyclerViewAdapter adapter;
+    private Integer selectedId = -1;
 
     private ArrayList<Puzzle> puzzleArrayList = new ArrayList<>();
 
@@ -64,9 +66,7 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
         binding = DownloadPageBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-       // updateRecyclerView();
 
-         
 
         model = new CrosswordMagicModel(this, 1);
 
@@ -81,9 +81,16 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
             @Override
             public void onClick(View view) {
                 //add passing
+
+                //get and add puzzle to database
+                controller.setPuzzleAddToDatabaseHTTP(selectedId);
+
+
                 Intent i = new Intent(passing, MainActivity.class);
-                i.putExtra("puzzleid", 1);
+                i.putExtra("puzzleid", puzzleid);
                 startActivity(i);
+
+
 
             }
         });
@@ -102,6 +109,16 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
                 PuzzleListItem itemSelected = adapter.getListItem(position);
 
 
+                if (selectedId.equals(itemSelected.getId())) {
+                    v.setBackgroundColor(Color.TRANSPARENT);
+
+                }
+                else{
+                    v.setBackgroundColor(Color.GRAY);
+                    selectedId = itemSelected.getId();
+
+                }
+
 
 
             }
@@ -118,7 +135,7 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
 
         ArrayList<PuzzleListItem> temp = new ArrayList<>();
         temp.add(new PuzzleListItem(1, "Test"));
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, temp);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, this.puzzleListItemsArrayList);
         binding.items.setHasFixedSize(true);
         binding.items.setLayoutManager(new LinearLayoutManager(this));
         binding.items.setAdapter(adapter);
@@ -145,6 +162,13 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
         String name = evt.getPropertyName();
         Object value = evt.getNewValue();
 
+        if(name.equals(CrosswordMagicController.PUZZLE_ADD_TO_DATABASE_HTTP)){
+            if (value instanceof Integer){
+                Integer temp = (Integer) value;
+                puzzleid = temp.intValue();
+            }
+        }
+
         if (name.equals(CrosswordMagicController.PUZZLE_LIST_PROPERTY)) {
 
             if (value instanceof PuzzleListItem[]) {
@@ -158,11 +182,10 @@ public class DownloadMenuActivity extends AppCompatActivity implements AbstractV
 
         }
         if(name.equals(CrosswordMagicController.PUZZLE_GET_REQUEST)){{
-            if(value instanceof JSONObject){
-                this.data = (JSONObject) value;
-                parseData();
+            if(value instanceof ArrayList){
+                this.puzzleListItemsArrayList = (ArrayList<PuzzleListItem>) value;
                 updateRecyclerView();
-                String test = "Testing!";
+
 
 
             }
