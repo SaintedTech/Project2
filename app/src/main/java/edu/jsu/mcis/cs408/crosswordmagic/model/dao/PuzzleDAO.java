@@ -174,7 +174,7 @@ public class PuzzleDAO {
 
             while(cursor.moveToNext()){
 
-                list.add(new PuzzleListItem(Integer.getInteger(cursor.getString(0)), cursor.getString(1)));
+                list.add(new PuzzleListItem(Integer.valueOf(cursor.getInt(0)), cursor.getString(1)));
 
             }
         }
