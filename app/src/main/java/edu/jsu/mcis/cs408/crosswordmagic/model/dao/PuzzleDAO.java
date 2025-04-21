@@ -67,6 +67,7 @@ public class PuzzleDAO {
 
     }
 
+
     /* return an existing puzzle entry from the database */
 
     public Puzzle find(int puzzleid) {

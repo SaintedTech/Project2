@@ -78,6 +78,7 @@ public class WebServiceDAO {
             WordDAO wordDAO = daoFactory.getWordDAO();
             puzzleID = puzzleDAO.create(result);
 
+
             // ..
             JSONArray jsonWordsArray = json.getJSONArray("puzzle");
             ArrayList<Word> wordsArrayList = new ArrayList<>();
